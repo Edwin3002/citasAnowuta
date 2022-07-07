@@ -3,32 +3,26 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from 'react-redux'
 import '../css/form.css'
 import { citasDefault } from '../data/citas';
-import { addCitas, emptyCitas } from '../redux/reducers/citasReducers';
+import { addCitas } from '../redux/reducers/citasReducers';
 
 export const Menu = () => {
 
-
-  const ed = {
-    name: 'ed',
-    id: 1
-  }
   const { register, formState: { errors }, handleSubmit } = useForm();
   const { citas, date } = useSelector((store) => store.citas)
   const dispatch = useDispatch();
   const onSubmit = (data) => {
-    dispatch(addCitas(data))
+    dispatch(addCitas({...data, id :citas[0].length + 1}))
   }
-  let dat = new Date()
-  console.log(dat.getFullYear() + '/' + (dat.getMonth() + 1));
+  let dat =  new Date()
+
   const increment = () => {
     console.log(citas);
     console.log(date);
   }
   const citasDefa = () => {
-    console.log(citasDefault);
-    console.log(citasDefault);
-    dispatch(addCitas(citasDefault))
-
+    let a = {...citasDefault, id :7}
+    console.log(a);
+    // dispatch(addCitas({...citasDefault, id :7}))
   }
 
   return (
@@ -39,8 +33,8 @@ export const Menu = () => {
         <p className='text-red-500'>{errors.name?.message}</p>
         <input className='my-2' type='email' {...register("mail", { required: "Digite su correo" })} />
         <p className='text-red-500'>{errors.mail?.message}</p>
-        <input autoComplete='on' className='my-2' type='date' {...register("date", { required: "Digite su correo" })} />
-        <p className='text-red-500'>{errors.date?.message}</p>
+        <input autoComplete='on' className='my-2' type='time' {...register("hour", { required: "Digite la fecha" })} />
+        <p className='text-red-500'>{errors.hour?.message}</p>
         <input type="submit" />
       </form>
       <button onClick={increment}>count</button>
