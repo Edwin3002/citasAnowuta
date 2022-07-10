@@ -2,32 +2,32 @@ export const citasDefault =
    [
             {
                 id: 1,
-                name: '1',
-                mail: '@1',
-                hour: '1'
+                name: 'Paco',
+                mail: 'paco@',
+                hour: '01:00'
             },
             {
                 id: 2,
-                name: '2',
-                mail: '',
-                hour: ''
+                name: 'Mario',
+                mail: 'mario@',
+                hour: '02:00'
             },
             {
                 id: 3,
-                name: '3',
-                mail: '',
-                hour: ''
+                name: 'Pedro',
+                mail: 'pedro@',
+                hour: '03:00'
             },
             {
                 id: 4,
-                name: '4',
-                mail: '',
-                hour: ''
+                name: 'Maria',
+                mail: 'maria@',
+                hour: '04:00'
             },
             {
                 id: 5,
-                name: '5',
-                mail: '',
-                hour: ''
+                name: 'Pepe',
+                mail: 'pepe@',
+                hour: '05:00'
             }
         ]

@@ -1,8 +1,9 @@
 
 import React from 'react'
 import {BrowserRouter , Routes , Route } from 'react-router-dom'
+import { CreateCitas } from '../Components/CreateCitas'
 import { Home } from '../Components/Home'
-import { Menu } from '../Components/Menu'
+import { ListCitasDataBase } from '../Components/ListCitasDataBase'
 import { Navb } from '../Components/Navb'
 export const Routers = () => {
   return (
@@ -10,7 +11,8 @@ export const Routers = () => {
     <Navb/>
     <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/menu' element={<Menu/>}/>
+        <Route path='/createCitas' element={<CreateCitas/>}/>
+        <Route path='/listCitas' element={<ListCitasDataBase/>}/>
     </Routes>
     </BrowserRouter>
   )
