@@ -7,8 +7,10 @@ export const ListCitas = () => {
     const { citas } = useSelector((store) => store.citas)
 
     return (
-        <table className="mx-auto w-3/4 text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-lg text-white uppercase   dark:bg-gray-700">
+        <div className='relative overflow-x-auto'>
+
+        <table className="mx-auto w-3/4  text-sm text-left text-gray-400 ">
+            <thead className="text-lg text-white uppercase   bg-gray-700">
                 <tr>
                     <th scope="col" className="px-6 py-3">
                         Nombre
@@ -20,6 +22,9 @@ export const ListCitas = () => {
                         Hora
                     </th>
                     <th scope="col" className="px-6 py-3">
+                        Disponible
+                    </th>
+                    <th scope="col" className="px-6 py-3">
                         Acciones
                     </th>
                 </tr>
@@ -28,10 +33,11 @@ export const ListCitas = () => {
                 
                 {citas[0] === undefined?
                  null:
-                citas.map((cita) => (
-                    <Citas key={cita.id} data={cita} />
-                ))}
+                 citas.map((cita) => (
+                     <Citas key={cita.id} data={cita} />
+                     ))}
             </tbody>
         </table>
+                     </div>
     )
 }

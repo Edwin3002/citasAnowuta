@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from 'react-redux'
 import '../css/form.css'
 import { citasDefault } from '../data/citas';
-import { addCitas, addCitasDefault, emptyCitas } from '../redux/reducers/citasReducers';
+import { addCitas, emptyCitas } from '../redux/reducers/citasReducers';
 import { ListCitas } from './ListCitas';
 import uuid from 'react-uuid'
 import { addCitasAsync } from '../firebase/dataInDB';
 
 export const CreateCitas = () => {
 
-  const [tf, settf] = useState(true)
   const { register, formState: { errors }, handleSubmit } = useForm();
   const { citas, date } = useSelector((store) => store.citas)
   const dispatch = useDispatch();
@@ -40,7 +38,8 @@ export const CreateCitas = () => {
         <input  className='my-2' type='checkbox' {...register("available")}  placeholder='Fecha'/>
         <span className='text-white'>Marca el check, si la Cita debe estar Disponible</span>
         </div>
-        <input className='text-white w-1/4 mx-auto bg-cyan-500 m-8' type="submit" value='Añadir cita' />
+        {/* <input className='text-white w-1/4 mx-auto bg-cyan-500 m-8' type="submit" value='Añadir cita' /> */}
+        <button className='text-white w-1/5 mx-auto bg-cyan-500 m-8 p-0 md:p-2' type="submit" value='Añadir cita' >Cargar en tabla</button>
       </form>
       <button className='text-white bg-blue-700 m-4 p-2' onClick={citasDef} >Agregar formato de citas</button>
       <button className='text-white bg-red-700 m-4 p-2' onClick={() => dispatch(emptyCitas())} >Eliminar todas las citas</button>

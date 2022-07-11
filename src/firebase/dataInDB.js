@@ -1,4 +1,3 @@
-import { async } from '@firebase/util';
 import { addDoc, collection, getDocs, } from 'firebase/firestore';
 import { getDataFire } from './ConfigFireBase';
 
