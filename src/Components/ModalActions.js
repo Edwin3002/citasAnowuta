@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { addCitas } from '../redux/reducers/citasReducers';
+import { deleteCitas, updateCitas } from '../redux/reducers/citasReducers';
 
 export const ModalActions = ({ mod, data }) => {
-
     const [edit, setEdit] = useState({
         name: data.name,
         mail: data.mail,
@@ -13,19 +12,23 @@ export const ModalActions = ({ mod, data }) => {
     })
     const { register,  handleSubmit } = useForm();
     const dispatch = useDispatch();
-
-    const onSubmit = (data) => {
-        console.log(data);
-        dispatch(addCitas(data))
-    }
-
+    
     const handleChange = e => {
-        console.log(e.target.value);
         setEdit({
             ...edit,
             [e.target.name]: e.target.value
         })
     }
+
+    const onSubmit = (dat) => {
+        dispatch(updateCitas({...dat, id: data.id}))
+        mod()
+    }
+    const deleteCita = (id) => {
+        dispatch(deleteCitas(id))
+        mod()
+    }
+
 
     useEffect(() => {
         setEdit(data)
@@ -55,7 +58,7 @@ export const ModalActions = ({ mod, data }) => {
                         </form>
                     </div>
                     <div className=" flex justify-between w-full p-4 space-x-2 rounded-b border-t text-white">
-                        <button onClick={mod} className="bg-red-700  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2 ">Eliminar</button>
+                        <button onClick={()=>deleteCita(data.id)} className="bg-red-700  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2 ">Eliminar</button>
                         <span className='flex justify-end'>
                             <button onClick={handleSubmit(onSubmit)} className="flex bg-green-700  justify-self-end rounded-lg border border-gray-200 text-sm font-medium px-5 py-2 mx-1">Actualizar</button>
                             <button className=" bg-blue-700  flex rounded-lg border border-gray-200 text-sm font-medium px-5 py-2 mx-1" onClick={mod}>Cancel</button>

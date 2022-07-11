@@ -23,8 +23,21 @@ const citasReducer = createSlice({
             action.payload.forEach(element => {
                 state.citas.push(element)
             });
-        }
+        },
+        updateCitas: (state, action) =>{
+            const { id, name, mail, hour, available } = action.payload;
+            const citaFound = state.citas.find((cita) => cita.id === id)
+            if (citaFound) {
+                citaFound.name = name;
+                citaFound.mail = mail;
+                citaFound.hour = hour;
+                citaFound.available = available;
+            }
+        },
+        deleteCitas: (state, action) =>{
+            state.citas = state.citas.filter((item) => item.id !== action.payload);
+        },
     }
 })
-export const {emptyCitas, addCitas, addCitasDefault} = citasReducer.actions 
+export const {emptyCitas, addCitas, addCitasDefault, updateCitas, deleteCitas} = citasReducer.actions 
 export default citasReducer.reducer

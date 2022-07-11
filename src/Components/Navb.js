@@ -17,13 +17,13 @@ export const Navb = () => {
                 <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
                     <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium text-white">
                         <li>
-                            <NavLink to="/" activeClass="active" className="block py-2 pr-4 pl-3  rounded md:p-1 ">Home</NavLink>
+                            <NavLink to="/" activeclass="active" className="block py-2 pr-4 pl-3  rounded md:p-1 ">Home</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/createCitas" activeClass="active" className="block py-2 pr-4 pl-3  rounded md:bg- md:p-1 ">Crear citas</NavLink>
+                            <NavLink to="/createCitas" activeclass="active" className="block py-2 pr-4 pl-3  rounded md:bg- md:p-1 ">Crear citas</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/listCitas" activeClass="active" className="block py-2 pr-4 pl-3  rounded  md:p-1 ">Lista de citas</NavLink>
+                            <NavLink to="/listCitas" activeclass="active" className="block py-2 pr-4 pl-3  rounded  md:p-1 ">Lista de citas</NavLink>
                         </li>
                     </ul>
                 </div>

@@ -21,7 +21,7 @@ export const Citas = ({ data, mod, modalDat }) => {
                 {data.available? 'Disponible': 'Ocupada'}
             </td>
             <td className="px-6 py-4 ">
-                <p href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:text-blue-700" onClick={modalEdit}>Edit</p>
+                <p className="text-center font-medium text-blue-600 dark:text-blue-500 hover:text-blue-700" onClick={modalEdit}>Edit or Delete</p>
             </td>
         </tr>
     )
