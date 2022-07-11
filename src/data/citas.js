@@ -1,16 +1,16 @@
 export const citasDefault =
    [
             {
-                name: '',
-                mail: '',
+                name: 'Paco',
+                mail: 'paco@gmail.com',
                 hour: '09:00',
                 available: true
             },
             {
-                name: '',
-                mail: '',
+                name: 'Lulu',
+                mail: 'lulu@gamil.com',
                 hour: '10:00',
-                available: true
+                available: false
             },
             {
                 name: '',

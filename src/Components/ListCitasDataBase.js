@@ -19,17 +19,17 @@ export const ListCitasDataBase = () => {
                 <h1 className="text-xl mb-5 text-center">Citas Disponibles</h1>
                 {
                     citasDB.map((cita, index) => (
-                <details key={index} className="w-full bg-white border border-blue-500 cursor-pointer mb-3">
-                    <summary className="w-full bg-white text-black flex justify-between px-4 py-3  after:content-['+']">{cita.date}</summary>
-                    {cita.dataCitas.map((cit, index) =>(
-                        // cit.available?
-                    <p key={index} className={cit.available? 'text-green-500': 'text-purple-500'}>
-                        {cit.name === ''? 'Nombre' : cit.name}
-                    </p>
-                    // :
-                    // null
-                    ))}
-                </details>
+                        <details key={index} className="w-full bg-white border border-blue-500 cursor-pointer mb-3">
+                            <summary className="w-full bg-white text-black flex justify-between px-4 py-3  after:content-['+']">{cita.date}</summary>
+                            {cita.dataCitas.map((cit, index) => (
+                                // cit.available?
+                                <p key={index} className={cit.available ? 'text-green-500' : 'text-purple-500'}>
+                                    {cit.name === '' ? 'Nombre' : cit.name}
+                                </p>
+                                // :
+                                // null
+                            ))}
+                        </details>
                     ))
                 }
             </div>
