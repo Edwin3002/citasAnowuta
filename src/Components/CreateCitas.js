@@ -16,34 +16,33 @@ export const CreateCitas = () => {
   const onSubmit = (data) => {
     dispatch(addCitas({ ...data, id: uuid() }))
   }
-  const [dataFire, setDataFire] = useState(
-    {
-      date: date,
-    }
-  );
-  const {dataCitas} = dataFire;
-  const uploadData = ()=>{
-    // dataCitas.push({citas})
-    console.log({date, dataCitas : citas});
-    addCitasAsync({date, dataCitas : citas})
+  const citasDef = () => {
+    // dispatch(addCitasDefault(citasDefault))
+    citasDefault.map(cita => (
+      dispatch(addCitas({ ...cita, id: uuid() }))
+    ));
+  }
+  const uploadData = () => {
+    addCitasAsync({ date, dataCitas: citas })
   }
   return (
     <div>
       <h2 className='text-center text-white text-4xl my-2'>Agregar Citas</h2>
       <form onSubmit={handleSubmit(onSubmit)} className=' flex flex-col w-2/3 m-auto text-black'>
-        <input className='my-2' {...register("name", { required: "Digite su nombre", maxLength: 20 })} />
-        <p className='text-red-500'>{errors.name?.message}</p>
-        <input className='my-2' type='email' {...register("mail", { required: "Digite su correo" })} />
-        <p className='text-red-500'>{errors.mail?.message}</p>
-        <input autoComplete='on' className='my-2' type='time' {...register("hour", { required: "Digite la fecha" })} />
-        <p className='text-red-500'>{errors.hour?.message}</p>
-        <input className='text-white bg-blue-700 m-8' type="submit"  value='Send'/>
+        <input className='my-2' {...register("name", { required: "Digite su nombre", maxLength: 20 })} placeholder='Nombre'/>
+        <p className='text-red-500 mb-4'>{errors.name?.message}</p>
+        <input className='my-2' type='email' {...register("mail", { required: "Digite su correo" })} placeholder='Correo'/>
+        <p className='text-red-500 mb-4'>{errors.mail?.message}</p>
+        <input autoComplete='on' className='my-2' type='time' {...register("hour", { required: "Digite la fecha" })}  placeholder='Fecha'/>
+        <p className='text-red-500 mb-4'>{errors.hour?.message}</p>
+        <input className='text-white bg-blue-700 m-8' type="submit" value='Send' />
       </form>
-        <button className='text-white bg-blue-700 m-4 p-2' onClick={()=>dispatch(addCitasDefault(citasDefault))} >Agregar formato de citas</button>
-        <button className='text-white bg-red-700 m-4 p-2' onClick={()=>dispatch(emptyCitas())} >Eliminar todas las citas</button>
-        <button className='text-white bg-green-700 m-4 p-2' onClick={()=>console.log({citas})} >Citas</button>
-        <button className='text-white bg-yellow-500 m-4 p-2' onClick={uploadData} >Cargar citas</button>
-      <ListCitas/>
+      <button className='text-white bg-blue-700 m-4 p-2' onClick={citasDef} >Agregar formato de citas</button>
+      <button className='text-white bg-red-700 m-4 p-2' onClick={() => dispatch(emptyCitas())} >Eliminar todas las citas</button>
+      <button className='text-white bg-green-700 m-4 p-2' onClick={uploadData} >Cargar citas</button>
+      {/* <button className='bg-yellow-500' onClick={() => console.log(citas)}>ver citas</button> */}
+
+      <ListCitas />
     </div>
   )
 }

@@ -7,7 +7,6 @@ export const ListCitasDataBase = () => {
 
     const getDataCitas = async () => {
         setCitasDB(await (paintCitasAsync()));
-        console.log(citasDB);
     }
 
     useEffect(() => {
@@ -15,18 +14,20 @@ export const ListCitasDataBase = () => {
     }, []);
     return (
         <div className='text-white'>
-            <button className='bg-yellow-500' onClick={() => console.log(citasDB)}>citas data base</button>
-            <div className='w-full max-w-lg px-10 py-8 mx-auto bg-green-200  text-black rounded-lg shadow-xl'>
-                <h1 className="text-xl mb-5 text-center">Citas Agendadas</h1>
+            {/* <button className='bg-yellow-500' onClick={()=>console.log(citasDB)}>ver citas</button> */}
+            <div className='w-full max-w-lg px-10 py-8 mx-auto my-12 bg-green-200  text-black rounded-lg shadow-xl'>
+                <h1 className="text-xl mb-5 text-center">Citas Disponibles</h1>
                 {
                     citasDB.map((cita, index) => (
                 <details key={index} className="w-full bg-white border border-blue-500 cursor-pointer mb-3">
                     <summary className="w-full bg-white text-black flex justify-between px-4 py-3  after:content-['+']">{cita.date}</summary>
                     {cita.dataCitas.map((cit, index) =>(
-
-                    <p key={index} className="px-4 py-3">
-                        {cit.name}
+                        // cit.available?
+                    <p key={index} className={cit.available? 'text-green-500': 'text-purple-500'}>
+                        {cit.name === ''? 'Nombre' : cit.name}
                     </p>
+                    // :
+                    // null
                     ))}
                 </details>
                     ))

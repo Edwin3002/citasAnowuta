@@ -8,19 +8,19 @@ export const ListCitas = () => {
 
     return (
         <table className="mx-auto w-3/4 text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead className="text-xs text-white uppercase  dark:bg-gray-700">
                 <tr>
                     <th scope="col" className="px-6 py-3">
-                        Name
+                        Nombre
                     </th>
                     <th scope="col" className="px-6 py-3">
-                        Mail
+                        Correo
                     </th>
                     <th scope="col" className="px-6 py-3">
-                        Hour
+                        Hora
                     </th>
                     <th scope="col" className="px-6 py-3">
-                        Edit
+                        Acciones
                     </th>
                 </tr>
             </thead>
