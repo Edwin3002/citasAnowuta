@@ -2,10 +2,11 @@ import React from 'react'
 
 export const Citas = ({ data }) => {
     return (
-        <tr className=" border-b dark:bg-gray-800 dark:border-gray-700">
-            <th scope="row" className="px-6 py-4 font-medium   whitespace-nowrap">
+        <tr className={data.name === ''? 'border-b underline' : 'text-white border-b'}>
+            {/* {data.name === ''? 'Nombre' : data.name}/ */}
+            <td scope="row" className="px-6 py-4 font-medium   whitespace-nowrap">
                 {data.name === ''? 'Nombre' : data.name}
-            </th>
+            </td>
             <td className="px-6 py-4">
                 {data.mail === ''? 'ejemplo@gmail.com' : data.mail}
             </td>

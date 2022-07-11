@@ -32,31 +32,20 @@ export const CreateCitas = () => {
       <form onSubmit={handleSubmit(onSubmit)} className=' flex flex-col w-2/3 m-auto text-black'>
         <input className='my-2' {...register("name", { required: "Digite su nombre", maxLength: 20 })} placeholder='Nombre'/>
         <p className='text-red-500 mb-4'>{errors.name?.message}</p>
-        <input className='my-2' type='email' {...register("mail", { required: "Digite su correo" })} placeholder='Correo'/>
+        <input className='my-2' type='email' {...register("mail")} placeholder='Correo'/>
         <p className='text-red-500 mb-4'>{errors.mail?.message}</p>
-        <input autoComplete='on' className='my-2' type='time' {...register("hour", { required: "Digite la fecha" })}  placeholder='Fecha'/>
+        <input className='my-2' type='time' {...register("hour", { required: "Digite la fecha" })}  placeholder='Fecha'/>
         <p className='text-red-500 mb-4'>{errors.hour?.message}</p>
         <div className='flex justify-evenly'>
         <input  className='my-2' type='checkbox' {...register("available")}  placeholder='Fecha'/>
-        <span className='text-white'>Cita Disponible</span>
+        <span className='text-white'>Marca el check, si la Cita debe estar Disponible</span>
         </div>
-        {/* <input  className='my-2' type='checkbox' {...register("available")}  placeholder='Fecha'/> */}
-        {/* <p className='text-red-500 mb-4'>{errors.available?.message}</p> */}
-        {/* <select className='my-2 bg-white' {...register("available", { required: "Digite la disponibilidad" })} >
-          <option value={true} >Cita Disponible</option>
-          <option value={false} >Cita NO disponible</option>
-        </select> */}
-        {/* <select {...register("gender")}>
-        <option value="female">female</option>
-        <option value="male">male</option>
-        <option value={true}>other</option>
-      </select> */}
         <input className='text-white w-1/4 mx-auto bg-cyan-500 m-8' type="submit" value='Añadir cita' />
       </form>
       <button className='text-white bg-blue-700 m-4 p-2' onClick={citasDef} >Agregar formato de citas</button>
       <button className='text-white bg-red-700 m-4 p-2' onClick={() => dispatch(emptyCitas())} >Eliminar todas las citas</button>
       <button className='text-white bg-green-700 m-4 p-2' onClick={uploadData} >Cargar citas</button>
-      <button className='bg-yellow-500' onClick={() => console.log(citas)}>ver citas</button>
+      {/* <button className='text-white bg-yellow-500 m-4 p-2' onClick={() => console.log(citas)}>Ver citas</button> */}
 
       <ListCitas />
     </div>
