@@ -10,6 +10,7 @@ import { addCitasAsync } from '../firebase/dataInDB';
 
 export const CreateCitas = () => {
 
+  const [tf, settf] = useState(true)
   const { register, formState: { errors }, handleSubmit } = useForm();
   const { citas, date } = useSelector((store) => store.citas)
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ export const CreateCitas = () => {
   const citasDef = () => {
     // dispatch(addCitasDefault(citasDefault))
     citasDefault.map(cita => (
-      dispatch(addCitas({ ...cita, id: uuid() }))
+      dispatch(addCitas({ ...cita, id: uuid()}))
     ));
   }
   const uploadData = () => {
@@ -35,12 +36,27 @@ export const CreateCitas = () => {
         <p className='text-red-500 mb-4'>{errors.mail?.message}</p>
         <input autoComplete='on' className='my-2' type='time' {...register("hour", { required: "Digite la fecha" })}  placeholder='Fecha'/>
         <p className='text-red-500 mb-4'>{errors.hour?.message}</p>
-        <input className='text-white bg-blue-700 m-8' type="submit" value='Send' />
+        <div className='flex justify-evenly'>
+        <input  className='my-2' type='checkbox' {...register("available")}  placeholder='Fecha'/>
+        <span className='text-white'>Cita Disponible</span>
+        </div>
+        {/* <input  className='my-2' type='checkbox' {...register("available")}  placeholder='Fecha'/> */}
+        {/* <p className='text-red-500 mb-4'>{errors.available?.message}</p> */}
+        {/* <select className='my-2 bg-white' {...register("available", { required: "Digite la disponibilidad" })} >
+          <option value={true} >Cita Disponible</option>
+          <option value={false} >Cita NO disponible</option>
+        </select> */}
+        {/* <select {...register("gender")}>
+        <option value="female">female</option>
+        <option value="male">male</option>
+        <option value={true}>other</option>
+      </select> */}
+        <input className='text-white w-1/4 mx-auto bg-cyan-500 m-8' type="submit" value='Añadir cita' />
       </form>
       <button className='text-white bg-blue-700 m-4 p-2' onClick={citasDef} >Agregar formato de citas</button>
       <button className='text-white bg-red-700 m-4 p-2' onClick={() => dispatch(emptyCitas())} >Eliminar todas las citas</button>
       <button className='text-white bg-green-700 m-4 p-2' onClick={uploadData} >Cargar citas</button>
-      {/* <button className='bg-yellow-500' onClick={() => console.log(citas)}>ver citas</button> */}
+      <button className='bg-yellow-500' onClick={() => console.log(citas)}>ver citas</button>
 
       <ListCitas />
     </div>
