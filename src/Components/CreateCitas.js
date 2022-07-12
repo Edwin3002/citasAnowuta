@@ -1,12 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from 'react-redux'
 import '../css/form.css'
-import { citasDefault } from '../data/citas';
-import { addCitas, emptyCitas } from '../redux/reducers/citasReducers';
+import { addCitas } from '../redux/reducers/citasReducers';
 import { ListCitas } from './ListCitas';
 import uuid from 'react-uuid'
-import { addCitasAsync } from '../firebase/dataInDB';
-import { useEffect, useState } from "react";
 
 
 
@@ -21,18 +18,7 @@ export const CreateCitas = () => {
     reset()
   }
 
-  const citasDef = () => {
-    citasDefault.map(cita => (
-      dispatch(addCitas({ ...cita, id: uuid() }))
-    ));
-  }
 
-  const uploadData = () => {
-    addCitasAsync({ date, dataCitas: citas })
-    setTimeout(() => {
-      dispatch(emptyCitas())
-    }, 2000)
-  }
 
 
 
@@ -52,13 +38,7 @@ export const CreateCitas = () => {
         </div>
         <button className='text-white w-1/5 mx-auto bg-cyan-500 m-8 p-0 md:p-2' type="submit" value='Añadir cita' >Cargar en tabla</button>
       </form>
-      <div className=" flex justify-between w-full p-4 space-x-2 rounded-b border-t text-white">
-        <button className='text-white bg-red-700 m-4 p-2' onClick={() => dispatch(emptyCitas())} >Eliminar todas las citas</button>
-        <span className='flex justify-end'>
-          <button className='text-white bg-blue-700 m-4 p-2' onClick={citasDef} >Agregar formato de citas</button>
-          <button className='text-white bg-green-700 m-4 p-2' onClick={uploadData} >Cargar citas</button>
-        </span>
-      </div>
+      
       {/* <button className='text-white bg-yellow-500 m-4 p-2' onClick={verCitas}>Ver citas</button> */}
       <ListCitas />
     </div>
