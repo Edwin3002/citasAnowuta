@@ -6,6 +6,9 @@ import { addCitas, emptyCitas } from '../redux/reducers/citasReducers';
 import { ListCitas } from './ListCitas';
 import uuid from 'react-uuid'
 import { addCitasAsync } from '../firebase/dataInDB';
+import { useEffect, useState } from "react";
+
+
 
 export const CreateCitas = () => {
 
@@ -26,17 +29,20 @@ export const CreateCitas = () => {
 
   const uploadData = () => {
     addCitasAsync({ date, dataCitas: citas })
-    setTimeout(()=>{
+    setTimeout(() => {
       dispatch(emptyCitas())
-    },2000)
+    }, 2000)
   }
+
+
+
   return (
     <div>
       <h2 className='text-center text-white text-4xl my-2'>Agregar Citas</h2>
       <form onSubmit={handleSubmit(onSubmit)} className=' flex flex-col w-2/3 m-auto text-black'>
         <input className='my-2' {...register("name", { required: "Digite su nombre", maxLength: 20 })} placeholder='Nombre' />
         <p className='text-red-500 mb-4'>{errors.name?.message}</p>
-        <input className='my-2' type='email' {...register("mail")} placeholder='Correo' />
+        <input className='my-2' type='email' {...register("mail", { required: "Digite la correo" })} placeholder='Correo' />
         <p className='text-red-500 mb-4'>{errors.mail?.message}</p>
         <input className='my-2' type='time' {...register("hour", { required: "Digite la fecha" })} placeholder='Fecha' />
         <p className='text-red-500 mb-4'>{errors.hour?.message}</p>
@@ -53,7 +59,7 @@ export const CreateCitas = () => {
           <button className='text-white bg-green-700 m-4 p-2' onClick={uploadData} >Cargar citas</button>
         </span>
       </div>
-      {/* <button className='text-white bg-yellow-500 m-4 p-2' onClick={() => console.log(citas)}>Ver citas</button> */}
+      {/* <button className='text-white bg-yellow-500 m-4 p-2' onClick={verCitas}>Ver citas</button> */}
       <ListCitas />
     </div>
   )

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { citasDefault } from "../../data/citas";
 
 const dat = new Date();
 let mon = ((dat.getMonth() + 1) >= 10 ? (dat.getMonth() + 1) : '0' + (dat.getMonth() + 1));

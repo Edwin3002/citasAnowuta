@@ -53,5 +53,11 @@ export const citasDefault =
                 mail: '',
                 hour: '17:00',
                 available: true
+            },
+            {
+                name: '',
+                mail: '',
+                hour: '01:00',
+                available: true
             }
         ]
