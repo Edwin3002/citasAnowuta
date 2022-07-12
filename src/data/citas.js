@@ -8,15 +8,15 @@ export const citasDefault =
             },
             {
                 name: 'Lulu',
-                mail: 'lulu@gamil.com',
+                mail: 'lulu@gmail.com',
                 hour: '10:00',
                 available: false
             },
             {
-                name: '',
-                mail: '',
+                name: 'Luz',
+                mail: 'luz@gmail.com',
                 hour: '11:00',
-                available: true
+                available: false
             },
             {
                 name: '',

@@ -19,22 +19,22 @@ export const ListCitas = () => {
     return (
         <div className='relative overflow-x-auto'>
 
-            <table className="mx-auto w-3/4  text-sm text-left text-gray-400 ">
-                <thead className="text-lg text-white uppercase   bg-gray-700">
-                    <tr>
-                        <th scope="col" className="px-6 py-3">
+            <table className="mx-auto w-full sm:w-3/4 text-xs sm:text-sm text-left text-gray-400 ">
+                <thead className=" text-white uppercase   bg-gray-700">
+                    <tr className='text-sm sm:text-xl'>
+                        <th scope="col" className="p-1">
                             Nombre
                         </th>
-                        <th scope="col" className="px-6 py-3">
+                        <th scope="col" className="p-1">
                             Correo
                         </th>
-                        <th scope="col" className="px-6 py-3">
+                        <th scope="col" className="p-1">
                             Hora
                         </th>
-                        <th scope="col" className="px-6 py-3">
+                        <th scope="col" className="p-1">
                             Disponible
                         </th>
-                        <th scope="col" className="px-6 py-3">
+                        <th scope="col" className="p-1">
                             Acciones
                         </th>
                     </tr>

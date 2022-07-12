@@ -11,7 +11,7 @@ export const Routers = () => {
     <Navb/>
     <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/createCitas' element={<CreateCitas/>}/>
+        <Route exact path='/createCitas' element={<CreateCitas/>}/>
         <Route path='/listCitas' element={<ListCitasDataBase/>}/>
     </Routes>
     </BrowserRouter>

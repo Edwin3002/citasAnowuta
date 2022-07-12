@@ -9,7 +9,7 @@ import { addCitasAsync } from '../firebase/dataInDB';
 
 export const CreateCitas = () => {
 
-  const { register, formState: { errors }, handleSubmit, reset  } = useForm();
+  const { register, formState: { errors }, handleSubmit, reset } = useForm();
   const { citas, date } = useSelector((store) => store.citas)
   const dispatch = useDispatch();
 
@@ -26,6 +26,9 @@ export const CreateCitas = () => {
 
   const uploadData = () => {
     addCitasAsync({ date, dataCitas: citas })
+    setTimeout(()=>{
+      dispatch(emptyCitas())
+    },2000)
   }
   return (
     <div>
@@ -43,9 +46,13 @@ export const CreateCitas = () => {
         </div>
         <button className='text-white w-1/5 mx-auto bg-cyan-500 m-8 p-0 md:p-2' type="submit" value='Añadir cita' >Cargar en tabla</button>
       </form>
-      <button className='text-white bg-blue-700 m-4 p-2' onClick={citasDef} >Agregar formato de citas</button>
-      <button className='text-white bg-red-700 m-4 p-2' onClick={() => dispatch(emptyCitas())} >Eliminar todas las citas</button>
-      <button className='text-white bg-green-700 m-4 p-2' onClick={uploadData} >Cargar citas</button>
+      <div className=" flex justify-between w-full p-4 space-x-2 rounded-b border-t text-white">
+        <button className='text-white bg-red-700 m-4 p-2' onClick={() => dispatch(emptyCitas())} >Eliminar todas las citas</button>
+        <span className='flex justify-end'>
+          <button className='text-white bg-blue-700 m-4 p-2' onClick={citasDef} >Agregar formato de citas</button>
+          <button className='text-white bg-green-700 m-4 p-2' onClick={uploadData} >Cargar citas</button>
+        </span>
+      </div>
       {/* <button className='text-white bg-yellow-500 m-4 p-2' onClick={() => console.log(citas)}>Ver citas</button> */}
       <ListCitas />
     </div>
