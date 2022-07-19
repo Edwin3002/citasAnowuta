@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { updateCitasAsync } from '../firebase/dataInDB';
 import { deleteCitas, updateCitas } from '../redux/reducers/citasReducers';
 
-export const ModalClients = ({ mod, data }) => {
+export const ModalClients = ({ mod, data, idCit }) => {
     const [edit, setEdit] = useState({
         name: data.name,
         mail: data.mail,
@@ -21,8 +22,9 @@ export const ModalClients = ({ mod, data }) => {
     }
 
     const onSubmit = (dat) => {
-        dispatch(updateCitas({...dat, id: data.id}))
-        mod()
+        dispatch(updateCitas(dat))
+        // updateCitasAsync(dat, idCit)
+        // mod()
     }
     const deleteCita = (id) => {
         dispatch(deleteCitas(id))

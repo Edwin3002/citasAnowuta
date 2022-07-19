@@ -1,10 +1,10 @@
 import React from 'react'
 
-export const CardFireBase = ({ data, mod, modalDat }) => {
+export const CardFireBase = ({ data, mod, modalDat, idCit }) => {
 
     const modalEdit = () => {
         mod()
-        modalDat(data)
+        modalDat(data, idCit)
     }
     return (
         <tr className={!data.available ? 'underline  even:bg-gray-600 odd:bg-gray-800' : 'text-white border-b even:bg-gray-600 odd:bg-gray-800'}>

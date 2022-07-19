@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { citasDefault } from "../../data/citas";
 
 const dat = new Date();
 let mon = ((dat.getMonth() + 1) >= 10 ? (dat.getMonth() + 1) : '0' + (dat.getMonth() + 1));
@@ -7,6 +6,7 @@ let day = (dat.getDate() >= 10 ?  dat.getDate()  : '0' + dat.getDate());
 
 const initialState = ({
     citas: [],
+    citasAgendadas: [],
     date: dat.getFullYear() + '/' + mon + '/' + day
 })
 
@@ -25,6 +25,10 @@ const citasReducer = createSlice({
                 state.citas.push(element)
             });
         },
+        addCitasFireBase: (state, action) =>{
+            console.log(action.payload);
+            state.citasAgendadas.push(action.payload)
+        },
         updateCitas: (state, action) =>{
             const { id, name, mail, hour, available } = action.payload;
             const citaFound = state.citas.find((cita) => cita.id === id)
@@ -40,5 +44,5 @@ const citasReducer = createSlice({
         },
     }
 })
-export const {emptyCitas, addCitas, addCitasDefault, updateCitas, deleteCitas} = citasReducer.actions 
+export const {emptyCitas, addCitas, addCitasDefault, updateCitas, deleteCitas, addCitasFireBase} = citasReducer.actions 
 export default citasReducer.reducer

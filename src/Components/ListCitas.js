@@ -36,7 +36,7 @@ export const ListCitas = () => {
     }
 
     const uploadData = () => {
-        addCitasAsync({ date, dataCitas: list })
+        addCitasAsync({ date, dataCitas: list, idCitas: uuid() })
         setTimeout(() => {
             dispatch(emptyCitas())
         }, 2000)
@@ -59,7 +59,6 @@ export const ListCitas = () => {
                     <button className='text-white bg-green-700 m-4 p-2' onClick={uploadData} >Cargar citas</button>
                 </span>
             </div>
-
             <table className="mx-auto w-full sm:w-3/4 text-xs sm:text-sm text-left text-gray-400 ">
                 <thead className=" text-white uppercase   bg-gray-700">
                     <tr className='text-sm sm:text-xl'>
@@ -81,7 +80,6 @@ export const ListCitas = () => {
                     </tr>
                 </thead>
                 <tbody className='bg-gray-800'>
-
                     {citas[0] === undefined ?
                         null :
                         list.map((cita) => (
@@ -95,7 +93,6 @@ export const ListCitas = () => {
                     <ModalActions mod={modalAction} data={dataModal} />
             }
             {/* <button className='text-white bg-yellow-500 m-4 p-2' onClick={verCitas}>Ver citas</button> */}
-
         </div>
     )
 }
