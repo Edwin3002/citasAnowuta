@@ -11,10 +11,9 @@ export const ListCitas = () => {
     const key = 'hour'
     const [dataModal, setDataModal] = useState()
     const [modalSta, setModalState] = useState(true)
-    const { citas, date } = useSelector((store) => store.citas)
+    const { citas, date, citasAgendadas } = useSelector((store) => store.citas)
     const [list, setList] = useState([])
     const dispatch = useDispatch();
-
 
     const modalAction = () => {
         setModalState(!modalSta)
@@ -41,10 +40,6 @@ export const ListCitas = () => {
             dispatch(emptyCitas())
         }, 2000)
     }
-    // const verCitas = () => {
-    //     console.log(list);
-    //     console.log(citas);
-    // }
 
     useEffect(() => {
         setList(sort_lists(key))
@@ -71,7 +66,7 @@ export const ListCitas = () => {
                         <th scope="col" className="p-1">
                             Hora
                         </th>
-                        <th scope="col" className="p-1">
+                        <th scope="col" className="p-1 hidden sm:block">
                             Disponible
                         </th>
                         <th scope="col" className="p-1">

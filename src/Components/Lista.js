@@ -30,19 +30,19 @@ const Lista = () => {
             name: 'Paco',
             mail: 'paco@gmail.com',
             hour: '15:00',
-            available: true
+            taken: true
         },
         {
             name: 'Sara',
             mail: 'lulu@gmail.com',
             hour: '10:00',
-            available: false
+            taken: false
         },
         {
             name: 'Luz',
             mail: 'luz@gmail.com',
             hour: '12:00',
-            available: false
+            taken: false
         }],
         'name'
     )

@@ -8,7 +8,7 @@ export const ModalActions = ({ mod, data }) => {
         name: data.name,
         mail: data.mail,
         hour: data.hour,
-        available: ''
+        taken: data.taken
     })
     const { register,  handleSubmit } = useForm();
     const dispatch = useDispatch();
@@ -52,8 +52,8 @@ export const ModalActions = ({ mod, data }) => {
                             <input value={edit.mail} className='my-2' type='email' {...register("mail")} name='mail' onChange={handleChange} placeholder='Correo' />
                             <input value={edit.hour} name="hour" className='my-2' type='time' {...register("hour")} onChange={handleChange} />
                             <div className='flex justify-evenly'>
-                                <input className='my-2' type='checkbox' {...register("available")} placeholder='Fecha' />
-                                <span className='text-white'>Marca el check, si la Cita debe estar Disponible</span>
+                                <input className='my-2' type='checkbox' {...register("taken")}  placeholder='Fecha' />
+                                <span className='text-white'>Marca, si deseas agendar la cita.</span>
                             </div>
                         </form>
                     </div>

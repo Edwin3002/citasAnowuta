@@ -10,16 +10,12 @@ import uuid from 'react-uuid'
 export const CreateCitas = () => {
 
   const { register, formState: { errors }, handleSubmit, reset } = useForm();
-  const { citas, date } = useSelector((store) => store.citas)
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     dispatch(addCitas({ ...data, id: uuid() }))
     reset()
   }
-
-
-
 
 
   return (
@@ -33,7 +29,7 @@ export const CreateCitas = () => {
         <input className='my-2' type='time' {...register("hour", { required: "Digite la fecha" })} placeholder='Fecha' />
         <p className='text-red-500 mb-4'>{errors.hour?.message}</p>
         <div className='flex justify-evenly'>
-          <input className='my-2' type='checkbox' {...register("available")} placeholder='Fecha' />
+          <input className='my-2' type='checkbox' {...register("taken")} placeholder='Fecha' />
           <span className='text-white'>Marca el check, si la Cita debe estar Disponible</span>
         </div>
         <button className='text-white w-1/5 mx-auto bg-cyan-500 m-8 p-0 md:p-2' type="submit" value='Añadir cita' >Cargar en tabla</button>

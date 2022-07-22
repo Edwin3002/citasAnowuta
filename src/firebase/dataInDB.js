@@ -1,6 +1,8 @@
-import { addDoc, collection, doc, getDocs, query, updateDoc, where, } from 'firebase/firestore';
-import { dataCitas } from '../data/citas';
+import { addDoc, arrayRemove, arrayUnion, collection, doc, getDocs, query, updateDoc, where, } from 'firebase/firestore';
+// import { dataCitas } from '../data/citas';
 import { getDataFire } from './ConfigFireBase';
+
+
 
 export const paintCitasAsync = async () => {
     const getDataCitas = await getDocs(
@@ -22,39 +24,18 @@ export const addCitasAsync = (dataCitas) => {
     )
 }
 
-export const updateCitasAsync = async (cita, idC) => {
-    console.log(cita);
-    console.log(idC);
+export const updateCitasAsync = async (citaAdd, citaDel, idC) => {
     const colleccionTraer = collection(getDataFire, 'AgendarCitas');
-    console.log(colleccionTraer);
     const q = query(colleccionTraer, where('idCitas', '==', idC));
     const data = await getDocs(q);
     let id;
     data.forEach(async (docu) => {
         id = docu.id;
     });
-    const citaEsp = doc(
-        getDataFire, 'AgendarCitas', id);
-        console.log(citaEsp);
-    await updateDoc(citaEsp, {dataCitas})
-
+    const citaEsp = doc(getDataFire, 'AgendarCitas', id);
+    console.log(citaDel);
+    await updateDoc(citaEsp, { dataCitas: arrayRemove(citaDel) })
+    await setTimeout(() => {
+        updateDoc(citaEsp, { dataCitas: arrayUnion(citaAdd) })
+    }, 2000)
 };
-
-// export const updateCareerAsync = (index, carrer) => {
-//     return async (dispatch) => {
-//       const colleccionTraer = collection(getMyData, 'universidades');
-//       const q = query(colleccionTraer, where('idCarrera', '==', index));
-//       const traerDatosQ = await getDocs(q);
-//       let id;
-//       traerDatosQ.forEach(async (docu) => {
-//         id = docu.id;
-//       });
-//       const documenRef = doc(getMyData, 'universidades', id);
-//       await updateDoc(documenRef, carrer)
-//         .then((resp) => {
-//           dispatch(UpdateCareerSync(carrer));
-//           dispatch(paintCareerAsync());
-//         })
-//         .catch((err) => console.warn(err));
-//     };
-//   };

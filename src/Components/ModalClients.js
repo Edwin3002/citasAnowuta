@@ -2,18 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { updateCitasAsync } from '../firebase/dataInDB';
-import { deleteCitas, updateCitas } from '../redux/reducers/citasReducers';
+import { updateCitasFireBase } from '../redux/reducers/citasReducers';
 
-export const ModalClients = ({ mod, data, idCit }) => {
+export const ModalClients = ({ mod, data, idCit, up }) => {
     const [edit, setEdit] = useState({
         name: data.name,
         mail: data.mail,
         hour: data.hour,
-        available: ''
+        taken: false,
+        id: data.id,
     })
-    const { register, formState: { errors },  handleSubmit } = useForm();
+
+    const { register, formState: { errors }, handleSubmit } = useForm();
     const dispatch = useDispatch();
-    
+
     const handleChange = e => {
         setEdit({
             ...edit,
@@ -21,20 +23,20 @@ export const ModalClients = ({ mod, data, idCit }) => {
         })
     }
 
-    const onSubmit = (dat) => {
-        dispatch(updateCitas(dat))
-        // updateCitasAsync(dat, idCit)
-        // mod()
-    }
-    const deleteCita = (id) => {
-        dispatch(deleteCitas(id))
+    const onSubmit = async (dat) => {
+        dispatch(updateCitasFireBase([dat, idCit[0], idCit[1]]))
+        console.log(dat, idCit[0]);
+        updateCitasAsync(dat, data, idCit[0])
         mod()
+
     }
 
 
     useEffect(() => {
         setEdit(data)
     }, [])
+
+
 
     return (
         <div aria-hidden="true" className="flex overflow-y-auto overflow-x-hidden fixed bottom-20 z-50 w-full  h-modal md:h-full justify-center items-center">
@@ -50,15 +52,18 @@ export const ModalClients = ({ mod, data, idCit }) => {
                     </div>
                     <div className="p-6 space-y-6 text-gray-300">
                         <form className=' flex flex-col w-2/3 m-auto text-black'>
-                            <input value={edit.name} name='name' className='my-2' {...register("name",{ required: "Digite su nombre" })} onChange={handleChange} placeholder='Nombre' />
+                            <input value={edit.name} name='name' className='my-2' {...register("name", { required: "Digite su nombre" })} onChange={handleChange} placeholder='Nombre' />
                             <p className='text-red-500 mb-4'>{errors.name?.message}</p>
                             <input value={edit.mail} className='my-2' type='email' {...register("mail", { required: "Digite su correo" })} name='mail' onChange={handleChange} placeholder='Correo' />
                             <p className='text-red-500 mb-4'>{errors.mail?.message}</p>
-                            <input value={edit.hour} name="hour" className='my-2' type='time' {...register("hour")}  />
+                            <input value={edit.hour} name="hour" className='my-2' type='time' {...register("hour")} />
+                            <input value={edit.id} name="text" className='my-2' type='id' {...register("id")} hidden />
+                            {/* <input value={edit.id} name="hour" className='my-2' type='time' {...register("hour")}  /> */}
                             <div className='flex justify-evenly'>
-                                <input className='my-2' type='checkbox' {...register("available")} placeholder='Fecha' />
-                                <span className='text-white'>Marca el check, si la Cita debe estar Disponible</span>
+                                <input className='my-2' type='checkbox' {...register("taken", { required: "Falta por llenar o marcar" })} placeholder='Fecha' />
+                                <span className='text-white'>Marca para agendar la cita</span>
                             </div>
+                                <p className='text-red-500 mb-4 text-center'>{errors.taken?.message}</p>
                         </form>
                     </div>
                     <div className=" flex justify-end w-full p-4 space-x-2 rounded-b border-t text-white">
