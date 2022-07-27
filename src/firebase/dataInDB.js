@@ -1,7 +1,5 @@
-import { addDoc, arrayRemove, arrayUnion, collection, doc, getDocs, query, updateDoc, where, } from 'firebase/firestore';
-// import { dataCitas } from '../data/citas';
+import { addDoc, arrayRemove, arrayUnion, collection, deleteDoc, doc, getDocs, query, updateDoc, where, } from 'firebase/firestore';
 import { getDataFire } from './ConfigFireBase';
-
 
 
 export const paintCitasAsync = async () => {
@@ -33,11 +31,18 @@ export const updateCitasAsync = async (citaAdd, citaDel, idC) => {
         id = docu.id;
     });
     const citaEsp = doc(getDataFire, 'AgendarCitas', id);
-    console.log(citaDel);
-    console.log(citaAdd);
     await updateDoc(citaEsp, { dataCitas: arrayRemove(citaDel) })
     await updateDoc(citaEsp, { dataCitas: arrayUnion(citaAdd) })
-    // await setTimeout(() => {
-    //     updateDoc(citaEsp, { dataCitas: arrayUnion(citaAdd) })
-    // }, 2000)
+
 };
+
+export const deleteTableAsync = async (id) => {
+    const colleccionTraer = collection(getDataFire, 'AgendarCitas');
+    const q = query(colleccionTraer, where('idCitas', '==', id));
+    const data = await getDocs(q);
+    let idC;
+    data.forEach(async (docu) => {
+        idC = docu.id;
+    });
+    await deleteDoc(doc(getDataFire, 'AgendarCitas', idC))
+}

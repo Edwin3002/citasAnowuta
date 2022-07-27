@@ -55,6 +55,9 @@ const citasReducer = createSlice({
                 citaFound.taken = taken;
             }
         },
+        deleteCitasFireBase: (state, action) => {
+            state.citasAgendadas = state.citasAgendadas.filter((item, index) => index !== action.payload);
+        },
         authAdmin: (state, action) => {
             state.admin = !state.admin;
         },
@@ -64,11 +67,10 @@ const citasReducer = createSlice({
             }else{
                 state.date = action.payload[1];
             }
-
         },
     }
 })
 export const { emptyCitas, addCitas, addCitasDefault, updateCitas,
     deleteCitas, addCitasFireBase, updateCitasFireBase, authAdmin,
-    updateDate_Psyc} = citasReducer.actions
+    updateDate_Psyc, deleteCitasFireBase} = citasReducer.actions
 export default citasReducer.reducer

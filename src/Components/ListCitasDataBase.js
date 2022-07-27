@@ -1,37 +1,38 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { paintCitasAsync } from '../firebase/dataInDB';
-import { addCitasFireBase } from '../redux/reducers/citasReducers';
+import { deleteTableAsync, paintCitasAsync } from '../firebase/dataInDB';
+import { addCitasFireBase, deleteCitasFireBase } from '../redux/reducers/citasReducers';
 import { CardFireBase } from './CardFireBase';
 import { ModalClients } from './ModalClients';
 
 export const ListCitasDataBase = () => {
 
-    const { citasAgendadas } = useSelector((store) => store.citas)
-    const [dataUp, setDataUp] = useState([])
+    const { citasAgendadas, admin } = useSelector((store) => store.citas)
     const dispatch = useDispatch();
-
-    const getDataCitas = async () => {
-        dispatch(addCitasFireBase(await (paintCitasAsync())))
-    }
-
+    const [dataUp, setDataUp] = useState([])
     const [dataModal, setDataModal] = useState()
     const [idCollec, setIdCollect] = useState()
     const [modalSta, setModalState] = useState(true)
+
     const modalAction = () => {
         setModalState(!modalSta)
     }
-
+    const getDataCitas = async () => {
+        dispatch(addCitasFireBase(sort_lists(await (paintCitasAsync()), 'date')))
+    }
     const modalData = (data, idC) => {
         setDataModal(data)
         setIdCollect(idC)
     }
-
     const subirFire = () => {
         console.log(dataUp);
     }
+    const deleteTable = (id , index) =>{
+        deleteTableAsync(id)
+        dispatch(deleteCitasFireBase(index))
+    }
 
-    const sort_lists = (data, key = 'hour', inverse) =>
+    const sort_lists = (data, key, inverse) =>
         inverse
             ? [...data].sort((b, a) => (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0))
 
@@ -75,12 +76,19 @@ export const ListCitasDataBase = () => {
                                     {
                                         cita === undefined ?
                                             null :
-                                            sort_lists(cita.dataCitas).map((cit) => (
+                                            sort_lists(cita.dataCitas , 'hour').map((cit) => (
                                                 <CardFireBase key={cit.id} data={cit} mod={modalAction} modalDat={modalData} idCit={[cita.idCitas, index]} />
                                             )
                                             )}
                                 </tbody>
                             </table>
+                            {
+                                admin ?
+                                    <div className='text-red-400 w-full flex flex-row-reverse mr-4'>
+                                        <span className='mr-4' onClick={()=>deleteTable(cita.idCitas, index)}>Borrar Tabla</span>
+                                    </div> :
+                                    null
+                            }
                         </details>
                     ))
                 }
