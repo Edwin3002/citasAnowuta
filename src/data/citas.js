@@ -1,8 +1,8 @@
 export const citasDefault =
     [
         {
-            name: 'Paco',
-            mail: 'paco@gmail.com',
+            name: '',
+            mail: '',
             hour: '09:00',
             taken: false
         },
@@ -13,8 +13,8 @@ export const citasDefault =
             taken: false
         },
         {
-            name: 'Luz',
-            mail: 'luz@gmail.com',
+            name: '',
+            mail: '',
             hour: '11:00',
             taken: false
         },
@@ -52,12 +52,6 @@ export const citasDefault =
             name: '',
             mail: '',
             hour: '17:00',
-            taken: false
-        },
-        {
-            name: '',
-            mail: '',
-            hour: '01:00',
             taken: false
         }
     ]
