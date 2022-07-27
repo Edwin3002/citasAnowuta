@@ -1,8 +1,7 @@
 
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { AuthContextProvider } from '../Components/Admin/authContext'
 import { Login } from '../Components/Admin/Login'
 import { CreateCitas } from '../Components/CreateCitas'
 import { Home } from '../Components/Home'

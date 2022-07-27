@@ -19,7 +19,7 @@ export const CreateCitas = () => {
 
 
   return (
-    <div>
+    <div className="mt-20">
       <h2 className='text-center text-white text-4xl my-2'>Agregar Citas</h2>
       <form onSubmit={handleSubmit(onSubmit)} className=' flex flex-col w-2/3 m-auto text-black'>
         <input className='my-2' {...register("name", { required: "Digite su nombre", maxLength: 20 })} placeholder='Nombre' />

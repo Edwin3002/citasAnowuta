@@ -10,9 +10,7 @@ export const Navb = ({ ad }) => {
     const dispatch = useDispatch()
     const [navB, setNavB] = useState(false)
 
-    const logout = (e) => {
-        e.preventDefault();
-        console.log('hi');
+    const logout = () => {
         dispatch(authAdmin());
         logoutLocalStorage()
         // <Navigate to='/home'/>
@@ -31,18 +29,18 @@ export const Navb = ({ ad }) => {
                 {navB ? <div className='flex justify-center w-full xl:flex mx-auto navbMobile mt-4 '>
                     <ul className='flex flex-col text-center absolute  mx-auto w-11/12 py-4  font-bold bg-gray-800 rounded-xl text-white'>
                         <li>
-                            <NavLink to="/home" activeclass="active" className="block py-2 pr-4 pl-3  rounded md:p-1 ">Home</NavLink>
+                            <NavLink to="/home" onClick={() => setNavB(!navB)} activeclass="active" className="block py-2 pr-4 pl-3  rounded md:p-1 ">Home</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/login" activeclass="active" className="block py-2 pr-4 pl-3  rounded md:bg- md:p-1 ">Iniciar sesión</NavLink>
+                            <NavLink to="/login" onClick={() => setNavB(!navB)} activeclass="active" className="block py-2 pr-4 pl-3  rounded md:bg- md:p-1 ">Iniciar sesión</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/listCitas" activeclass="active" className="block py-2 pr-4 pl-3  rounded  md:p-1 ">Lista de citas</NavLink>
+                            <NavLink to="/listCitas" onClick={() => setNavB(!navB)} activeclass="active" className="block py-2 pr-4 pl-3  rounded  md:p-1 ">Lista de citas</NavLink>
                         </li>
                         {
                             ad ?
                                 <li>
-                                    <div onClick={logout} className="block py-2 pr-4 pl-3  rounded  md:p-1 ">Cerrar sesión</div>
+                                    <div onClick={() => {setNavB(!navB); logout()}} className="block py-2 pr-4 pl-3  rounded  md:p-1 ">Cerrar sesión</div>
                                 </li> :
                                 null
                         }
