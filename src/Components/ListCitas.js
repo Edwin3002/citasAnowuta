@@ -5,13 +5,14 @@ import { citasDefault } from '../data/citas'
 import { addCitasAsync } from '../firebase/dataInDB'
 import { addCitas, emptyCitas } from '../redux/reducers/citasReducers'
 import { Citas } from './Citas'
+import { Date_Psy } from './Date_Psy'
 import { ModalActions } from './ModalActions'
 
 export const ListCitas = () => {
     const key = 'hour'
     const [dataModal, setDataModal] = useState()
     const [modalSta, setModalState] = useState(true)
-    const { citas, date } = useSelector((store) => store.citas)
+    const { citas, date, psychologist } = useSelector((store) => store.citas)
     const [list, setList] = useState([])
     const dispatch = useDispatch();
 
@@ -35,10 +36,14 @@ export const ListCitas = () => {
     }
 
     const uploadData = () => {
-        addCitasAsync({ date, dataCitas: list, idCitas: uuid() })
-        setTimeout(() => {
-            dispatch(emptyCitas())
-        }, 2000)
+        if(date === '' || psychologist === '' || citas[0] === undefined){
+            alert('falta la fecha o psicólogo')
+        }else{
+            addCitasAsync({ date, dataCitas: list, idCitas: uuid(), psychologist })
+            setTimeout(() => {
+                dispatch(emptyCitas())
+            }, 2000)
+        }
     }
 
     useEffect(() => {
@@ -53,6 +58,9 @@ export const ListCitas = () => {
                     <button className='text-white bg-blue-700 m-4 p-2' onClick={citasDef} >Agregar formato de citas</button>
                     <button className='text-white bg-green-700 m-4 p-2' onClick={uploadData} >Cargar citas</button>
                 </span>
+            </div>
+            <div className='text-white'>
+                <Date_Psy/>
             </div>
             <table className="mx-auto w-full sm:w-3/4 text-xs sm:text-sm text-left text-gray-400 ">
                 <thead className=" text-white uppercase   bg-gray-700">

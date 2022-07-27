@@ -8,15 +8,14 @@ import { authAdmin } from '../../redux/reducers/citasReducers'
 export const Login = () => {
 
     const dispatch = useDispatch()
-    const { register, formState: { errors }, handleSubmit, reset } = useForm();
+    const { register, formState: { errors }, handleSubmit } = useForm();
 
     const login = (data) => {
-        const {user, password} = data
-        if(user === 'admin' && password === '1234'){
-
+        const { user, password } = data
+        if (user === 'admin' && password === '1234') {
             dispatch(authAdmin());
             loginLocalStorage()
-        }else{
+        } else {
             alert('datos invalidos')
         }
     }
@@ -35,8 +34,9 @@ export const Login = () => {
                 <form onSubmit={handleSubmit(login)}>
                     <input className='px-2 my-2 w-full' type='text'{...register("user", { required: "Digite su usuario", maxLength: 20 })} placeholder='Nombre' />
                     <p className='text-red-500 mb-4'>{errors.user?.message}</p>
-                    <input className='px-2 my-2 w-full' type='password' {...register("password", { required: "Digite su contraseña" })} placeholder='Correo' />
+                    <input className='px-2 my-2 w-full' type='password' {...register("password", { required: "Digite su contraseña" })} placeholder='Contraseña' />
                     <p className='text-red-500 mb-4'>{errors.password?.message}</p>
+
                     <button className='text-white w-full  bg-cyan-500 mt-8 p-2' type="submit" >Iniciar</button>
                 </form>
             </div>

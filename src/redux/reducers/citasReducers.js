@@ -1,16 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Navigate } from "react-router-dom";
 import { verifyLocalStorage } from "../../helpers/LocalStorageAuth/LocalS";
 
-const dat = new Date();
-let mon = ((dat.getMonth() + 1) >= 10 ? (dat.getMonth() + 1) : '0' + (dat.getMonth() + 1));
-let day = (dat.getDate() >= 10 ? dat.getDate() : '0' + dat.getDate());
+// const dat = new Date();
+// let mon = ((dat.getMonth() + 1) >= 10 ? (dat.getMonth() + 1) : '0' + (dat.getMonth() + 1));
+// let day = (dat.getDate() >= 10 ? dat.getDate() : '0' + dat.getDate());
+// date: dat.getFullYear() + '-' + mon + '-' + day,
 const value = verifyLocalStorage()
 const initialState = ({
     citas: [],
     citasAgendadas: [],
-    date: dat.getFullYear() + '/' + mon + '/' + day,
-    admin: value
+    date: '',
+    psychologist: '',
+    admin: value,
 })
 
 const citasReducer = createSlice({
@@ -46,7 +47,8 @@ const citasReducer = createSlice({
         },
         updateCitasFireBase: (state, action) => {
             const { id, name, mail, taken } = action.payload[0];
-            const citaFound = state.citasAgendadas[action.payload[2]].dataCitas.find((cita) => cita.id === id)
+            const citaFound = state.citasAgendadas[action.payload[2]]
+            .dataCitas.find((cita) => cita.id === id)
             if (citaFound) {
                 citaFound.name = name;
                 citaFound.mail = mail;
@@ -55,9 +57,18 @@ const citasReducer = createSlice({
         },
         authAdmin: (state, action) => {
             state.admin = !state.admin;
-            // navigate('/home')
+        },
+        updateDate_Psyc: (state, action) => {
+            if(action.payload[0] === 'psychologist'){
+                state.psychologist = action.payload[1];
+            }else{
+                state.date = action.payload[1];
+            }
+
         },
     }
 })
-export const { emptyCitas, addCitas, addCitasDefault, updateCitas, deleteCitas, addCitasFireBase, updateCitasFireBase, authAdmin } = citasReducer.actions
+export const { emptyCitas, addCitas, addCitasDefault, updateCitas,
+    deleteCitas, addCitasFireBase, updateCitasFireBase, authAdmin,
+    updateDate_Psyc} = citasReducer.actions
 export default citasReducer.reducer

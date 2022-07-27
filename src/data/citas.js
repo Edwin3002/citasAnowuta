@@ -4,11 +4,11 @@ export const citasDefault =
             name: 'Paco',
             mail: 'paco@gmail.com',
             hour: '09:00',
-            taken: true
+            taken: false
         },
         {
-            name: 'Lulu',
-            mail: 'lulu@gmail.com',
+            name: '',
+            mail: '',
             hour: '10:00',
             taken: false
         },

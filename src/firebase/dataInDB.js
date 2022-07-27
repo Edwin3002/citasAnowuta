@@ -34,8 +34,10 @@ export const updateCitasAsync = async (citaAdd, citaDel, idC) => {
     });
     const citaEsp = doc(getDataFire, 'AgendarCitas', id);
     console.log(citaDel);
+    console.log(citaAdd);
     await updateDoc(citaEsp, { dataCitas: arrayRemove(citaDel) })
-    await setTimeout(() => {
-        updateDoc(citaEsp, { dataCitas: arrayUnion(citaAdd) })
-    }, 2000)
+    await updateDoc(citaEsp, { dataCitas: arrayUnion(citaAdd) })
+    // await setTimeout(() => {
+    //     updateDoc(citaEsp, { dataCitas: arrayUnion(citaAdd) })
+    // }, 2000)
 };

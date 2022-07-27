@@ -25,7 +25,6 @@ export const ModalClients = ({ mod, data, idCit, up }) => {
 
     const onSubmit = async (dat) => {
         dispatch(updateCitasFireBase([dat, idCit[0], idCit[1]]))
-        console.log(dat, idCit[0]);
         updateCitasAsync(dat, data, idCit[0])
         mod()
 
@@ -56,9 +55,9 @@ export const ModalClients = ({ mod, data, idCit, up }) => {
                             <p className='text-red-500 mb-4'>{errors.name?.message}</p>
                             <input value={edit.mail} className='my-2' type='email' {...register("mail", { required: "Digite su correo" })} name='mail' onChange={handleChange} placeholder='Correo' />
                             <p className='text-red-500 mb-4'>{errors.mail?.message}</p>
-                            <input value={edit.hour} name="hour" className='my-2' type='time' {...register("hour")} />
+                            <input  value={edit.hour} name="hour" className='my-2 hidden' type='time' {...register("hour")} />
+                            <input disabled  value={edit.hour} className='my-2' type='time'  />
                             <input value={edit.id} name="text" className='my-2' type='id' {...register("id")} hidden />
-                            {/* <input value={edit.id} name="hour" className='my-2' type='time' {...register("hour")}  /> */}
                             <div className='flex justify-evenly'>
                                 <input className='my-2' type='checkbox' {...register("taken", { required: "Falta por llenar o marcar" })} placeholder='Fecha' />
                                 <span className='text-white'>Marca para agendar la cita</span>
@@ -69,7 +68,7 @@ export const ModalClients = ({ mod, data, idCit, up }) => {
                     <div className=" flex justify-end w-full p-4 space-x-2 rounded-b border-t text-white">
                         {/* <button onClick={()=>deleteCita(data.id)} className="bg-red-700  rounded-lg border border-gray-200 text-sm font-medium px-5 py-2 ">Eliminar</button> */}
                         <span className='flex justify-end'>
-                            <button onClick={handleSubmit(onSubmit)} className="flex bg-green-700  justify-self-end rounded-lg border border-gray-200 text-sm font-medium px-5 py-2 mx-1">Actualizar</button>
+                            <button onClick={handleSubmit(onSubmit)} className="flex bg-green-700  justify-self-end rounded-lg border border-gray-200 text-sm font-medium px-5 py-2 mx-1">Agendar cita</button>
                             <button className=" bg-blue-700  flex rounded-lg border border-gray-200 text-sm font-medium px-5 py-2 mx-1" onClick={mod}>Cancel</button>
                         </span>
                     </div>

@@ -27,9 +27,15 @@ export const ListCitasDataBase = () => {
         setIdCollect(idC)
     }
 
-    const subirFire=()=>{
+    const subirFire = () => {
         console.log(dataUp);
     }
+
+    const sort_lists = (data, key = 'hour', inverse) =>
+        inverse
+            ? [...data].sort((b, a) => (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0))
+
+            : [...data].sort((a, b) => (a[key] > b[key] ? 1 : a[key] < b[key] ? -1 : 0))
 
     useEffect(() => {
         setDataUp(citasAgendadas)
@@ -44,7 +50,7 @@ export const ListCitasDataBase = () => {
                 {
                     citasAgendadas.map((cita, index) => (
                         <details key={cita.idCitas} className="w-full bg-white border border-blue-500 cursor-pointer mb-3">
-                            <summary className="w-full bg-white text-black flex justify-between px-4 py-3  after:content-['+']">{cita.date}</summary>
+                            <summary className="w-full bg-white text-black flex justify-between px-4 py-3  after:content-['+']"> <span className='font-bold capitalize'>{cita.psychologist}</span>{cita.date}</summary>
                             <table className="mx-auto w-full sm:w-3/4 text-xs sm:text-sm text-left text-gray-400 my-2">
                                 <thead className=" text-white uppercase   bg-gray-700">
                                     <tr className='text-sm sm:text-xl'>
@@ -66,11 +72,13 @@ export const ListCitasDataBase = () => {
                                     </tr>
                                 </thead>
                                 <tbody className='bg-gray-800'>
-                                    {cita === undefined ?
-                                        null :
-                                        cita.dataCitas.map((cit) => (
-                                            <CardFireBase key={cit.id} data={cit} mod={modalAction} modalDat={modalData} idCit={[cita.idCitas, index]} />
-                                        ))}
+                                    {
+                                        cita === undefined ?
+                                            null :
+                                            sort_lists(cita.dataCitas).map((cit) => (
+                                                <CardFireBase key={cit.id} data={cit} mod={modalAction} modalDat={modalData} idCit={[cita.idCitas, index]} />
+                                            )
+                                            )}
                                 </tbody>
                             </table>
                         </details>
