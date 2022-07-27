@@ -1,13 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Navigate } from "react-router-dom";
+import { verifyLocalStorage } from "../../helpers/LocalStorageAuth/LocalS";
 
 const dat = new Date();
 let mon = ((dat.getMonth() + 1) >= 10 ? (dat.getMonth() + 1) : '0' + (dat.getMonth() + 1));
 let day = (dat.getDate() >= 10 ? dat.getDate() : '0' + dat.getDate());
-
+const value = verifyLocalStorage()
 const initialState = ({
     citas: [],
     citasAgendadas: [],
-    date: dat.getFullYear() + '/' + mon + '/' + day
+    date: dat.getFullYear() + '/' + mon + '/' + day,
+    admin: value
 })
 
 const citasReducer = createSlice({
@@ -49,11 +52,12 @@ const citasReducer = createSlice({
                 citaFound.mail = mail;
                 citaFound.taken = taken;
             }
-            const citaFound2 = state.citasAgendadas[action.payload[2]].dataCitas.find((cita) => cita.id === id)
-                    // updateCitasAsync(dat, idCit[1])
-                    // pruebaAsync(citaFound2, action.payload[2])
+        },
+        authAdmin: (state, action) => {
+            state.admin = !state.admin;
+            // navigate('/home')
         },
     }
 })
-export const { emptyCitas, addCitas, addCitasDefault, updateCitas, deleteCitas, addCitasFireBase, updateCitasFireBase } = citasReducer.actions
+export const { emptyCitas, addCitas, addCitasDefault, updateCitas, deleteCitas, addCitasFireBase, updateCitasFireBase, authAdmin } = citasReducer.actions
 export default citasReducer.reducer

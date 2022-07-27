@@ -7,8 +7,8 @@ export const Home = () => {
     <div>
       <div className='h-screen flex items-center'>
       <img className='w-1/4 m-auto' src={Logo} alt='hongos'/>
+      {/* <h1 className='text-white'>home</h1> */}
       </div>
-      <Lista/>
     </div>
   )
 }

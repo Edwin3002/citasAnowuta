@@ -11,7 +11,7 @@ export const ListCitas = () => {
     const key = 'hour'
     const [dataModal, setDataModal] = useState()
     const [modalSta, setModalState] = useState(true)
-    const { citas, date, citasAgendadas } = useSelector((store) => store.citas)
+    const { citas, date } = useSelector((store) => store.citas)
     const [list, setList] = useState([])
     const dispatch = useDispatch();
 

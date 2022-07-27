@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import '../css/form.css'
 import { addCitas } from '../redux/reducers/citasReducers';
 import { ListCitas } from './ListCitas';

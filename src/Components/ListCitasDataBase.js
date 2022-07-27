@@ -39,8 +39,8 @@ export const ListCitasDataBase = () => {
     }, []);
     return (
         <div className='text-white'>
-            <div className='w-7/8 lg:w-3/4  p-1 sm:p-8 mx-auto my-12 bg-green-200  text-black rounded-lg shadow-xl'>
-                <h1 className="text-xl mb-5 text-center">Citas Disponibles</h1>
+            <div className='w-7/8 lg:w-3/4  p-1 sm:p-8 mx-auto bg-green-200 mt-20 text-black rounded-lg shadow-xl'>
+                <h1 className="text-xl mb-5 text-center ">Citas Disponibles</h1>
                 {
                     citasAgendadas.map((cita, index) => (
                         <details key={cita.idCitas} className="w-full bg-white border border-blue-500 cursor-pointer mb-3">
