@@ -1,12 +1,8 @@
 export const verifyLocalStorage = () => {
     const localS = JSON.parse(localStorage.getItem('auth'));
     if (localS === null) {
-        localStorage.setItem('auth', false);
         return false
-    } else if (localS === false) {
-        return false
-    }
-    else {
+    } else {
         return true
     }
 }
@@ -16,5 +12,5 @@ export const loginLocalStorage = () => {
 }
 
 export const logoutLocalStorage = () => {
-    localStorage.setItem('auth', false);
+    localStorage.removeItem('auth');
 }
